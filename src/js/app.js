@@ -6,4 +6,4 @@ var app = {};
 
 
 //initialize the application
-m.module(document, app);
+m.module(document.getElementById('app'), app);
