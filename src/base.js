@@ -6,6 +6,7 @@ $('.special.cards .image').dimmer({
 
 //drawer functionality for Chat window
 $(".top-bar").on("click",function(){
+	$('.chat').transition('fly up');
 	$(".chat").css("display","none");
 	$(".chat-minified").css("display","block");
 })
