@@ -1,5 +1,9 @@
-$color-chat-green: #7dce9f;
-
+$color-chat-grey: #cccccc;
+body,html{
+	padding: 20px;
+	padding-bottom: 0px;
+	overflow-y: hidden;
+}
 .chrome-remove-outline{
 	&:focus{
 		outline: none;
@@ -25,7 +29,7 @@ $color-chat-green: #7dce9f;
 }
 
 .top-bar {
-  background: #cccccc;
+  background: $color-chat-grey;
   color: white;
   padding: 0.5rem;
   position: relative;
@@ -138,4 +142,19 @@ $color-chat-green: #7dce9f;
 @keyframes pulse {
   from { opacity: 0; }
   to { opacity: 0.5; }
+}
+.chat-minified{
+	background-color: $color-chat-grey;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	height: 10px;
+	width: 300px;
+	display: none;
+	margin-right: 20px;
+	&:hover{
+		cursor: pointer;
+	}
+
 }

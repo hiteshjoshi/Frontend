@@ -1,3 +1,8 @@
+body, html {
+  padding: 20px;
+  padding-bottom: 0px;
+  overflow-y: hidden; }
+
 .chrome-remove-outline:focus {
   outline: none; }
 
@@ -112,5 +117,17 @@
     opacity: 0; }
   to {
     opacity: 0.5; } }
+.chat-minified {
+  background-color: #cccccc;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 10px;
+  width: 300px;
+  display: none;
+  margin-right: 20px; }
+  .chat-minified:hover {
+    cursor: pointer; }
 
 /*# sourceMappingURL=base.css.map */

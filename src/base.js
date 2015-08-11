@@ -1,15 +1,15 @@
+
+//on hover effect for team members cards.
 $('.special.cards .image').dimmer({
   on: 'hover'
 })
 
-var m = require("mithril");
-
-function layout() {  
-  return m("div", {class:"container"}, [
-          m("div", {id:"header"}, "This is the header"), 
-          m("main", {id:"content"}, "This is the content"), 
-          m("footer", {id:"footer"}, "This is the footer")
-         ]);
-}
-
-m.render(document.body, layout()); 
+//drawer functionality for Chat window
+$(".top-bar").on("click",function(){
+	$(".chat").css("display","none");
+	$(".chat-minified").css("display","block");
+})
+$(".chat-minified").on("click",function(){
+	$(this).css("display","none");
+	$(".chat").css("display","block")
+})
