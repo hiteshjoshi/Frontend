@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--Meta data-->
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+	<!--Stylesheets-->
+	<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+	<!--Scripts-->
+	<script src="external/jquery.js"></script>
+	<script src="semantic/dist/semantic.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/mithril/0.2.0/mithril.min.js"></script>
+	<title>Ask Parrot</title>
+</head>
+<body style="padding:20px">	
+	<!--horizontal menu-->
+	<div class="ui secondary pointing menu">
+  		<a class="item">Home</a>
+    	<a class="item">Team</a>
+		<a class="active item">Account</a>
+  		<div class="right menu" style="padding: 10px">
+  			<div class="ui search" style="margin-right: 20px;">
+  				<div class="ui icon input">
+    				<input class="prompt" type="text" placeholder="Search" style="height:20px;">
+    				<i class="search icon"></i>
+  				</div>
+  				<div class="results"></div>
+			</div>
+  			<img class="ui avatar image" src="img/user.png" style="height: 45px; width:auto;">
+    	</div>
+    </div>
+    <!--Team Info-->
+    <img class="ui medium centered circular image" src="img/user.png">
+    <h2 class="ui center aligned icon header"> Company Name </h2>
+    <br>
+    <div class="ui four statistics">
+      <div class="statistic">
+        <div class="value">560</div>
+        <div class="label">Tickets</div>
+      </div>
+      <div class="statistic">
+        <div class="text value">Four<br>Thousand</div>
+        <div class="label">Parrot Answers</div>
+      </div>
+      <div class="statistic">
+        <div class="value">
+        <i class="comment outline icon"></i> 194
+      </div>
+        <div class="label">Manual Answers</div>
+      </div>
+      <div class="statistic">
+        <div class="value">
+        <img src="img/user.png" class="ui circular inline image">12
+        </div>
+      <div class="label">Team Members</div>
+    </div>
+  </div>
+
+<!--End Scripts-->
+<script src="src/base.js"></script>
+</body>
+</html>
