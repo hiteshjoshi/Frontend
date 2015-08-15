@@ -123,7 +123,9 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 .grey{
 	color: #3f3f3f;
 }
-
+.title{
+	font-weight: 800;
+}
 .col-centered{
     float: none;
     margin: 0 auto;

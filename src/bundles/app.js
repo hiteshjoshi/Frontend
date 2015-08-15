@@ -434,20 +434,20 @@ webpackJsonp([0],[
 	                'value': 100,
 	                'density': {
 	                  'enable': true,
-	                  'value_area': 800
+	                  'value_area': 700
 	                }
 	              },
 	              'color': {
-	                'value': '#000000'
+	                'value': '#6d6d6d'
 	              },
 	              'shape': {
 	                'type': 'circle',
 	                'stroke': {
 	                  'width': 0,
-	                  'color': '#000000'
+	                  'color': '#2d2d2d'
 	                },
 	                'polygon': {
-	                  'nb_sides': 5
+	                  'nb_sides': 6
 	                },
 	                'image': {
 	                  'src': 'img/github.svg',
@@ -456,17 +456,17 @@ webpackJsonp([0],[
 	                }
 	              },
 	              'opacity': {
-	                'value': 0.5,
+	                'value': 0.9,
 	                'random': false,
 	                'anim': {
 	                  'enable': false,
 	                  'speed': 1,
-	                  'opacity_min': 0.1,
+	                  'opacity_min': 0.5,
 	                  'sync': false
 	                }
 	              },
 	              'size': {
-	                'value': 3,
+	                'value': 4,
 	                'random': true,
 	                'anim': {
 	                  'enable': false,
@@ -512,6 +512,7 @@ webpackJsonp([0],[
 	              },
 	              'modes': {
 	                'grab': {
+	                  'particles_nb': 4,
 	                  'distance': 140,
 	                  'line_linked': {
 	                    'opacity': 1
