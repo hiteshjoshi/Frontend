@@ -653,8 +653,8 @@ webpackJsonp([0],[
 	//
 	module.exports = function (module) {
 		module.factory('api', ['$rootScope','$http', function ($rootScope,$http) {
-			var parseUrl = 'http://localhost:8080';
-			//var parseUrl = 'http://internal.loudshout.net/api';
+			//var parseUrl = 'http://localhost:8080';
+			var parseUrl = 'http://api.askparrot.com';
 
 			var parseHeaders = {}; //set Headers for JWTTOKEN
 
@@ -1360,6 +1360,32 @@ webpackJsonp([0],[
 	              /** Controllers */
 	              __webpack_require__(27)(module);
 	              
+	              deferred.resolve();
+	            });
+
+	            return deferred.promise;
+	          }]
+	        }
+	      });
+
+	      $stateProvider.state('default.signup', {
+	        url: '/signup',
+	        templateUrl: 'modules/homepage/views/signup.html',
+	        data: {
+	          permissions: {
+	            only: ['anonymous'],
+	            redirectTo: 'dashboard.index'
+	          }
+	        },
+	        resolve: {
+	          load: ['$q', '$rootScope', function ($q, $rootScope) {
+	            var deferred = $q.defer();
+
+	            __webpack_require__.e/* nsure */(12, function () {
+	                
+	              /** Controllers */
+	              __webpack_require__(28)(module);
+	            
 	              deferred.resolve();
 	            });
 

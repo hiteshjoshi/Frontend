@@ -10,7 +10,7 @@ module.exports = function (module) {
   	$scope.errors = false;
   	$scope.login = function () {
 
-  		api.post('login',false,{email:$scope.email,password:$scope.password},function(err,response){
+  		api.post('users','login',{email:$scope.email,password:$scope.password},function(err,response){
   			if(err || response.error){
   				$scope.errors = true;
   				$scope.success = false;

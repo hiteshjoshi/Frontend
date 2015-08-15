@@ -1,11 +1,12 @@
 		<ul class="side-nav" ng:show="user" ng:hide="user.is_admin">
-          <li ><a ui-sref="dashboard.index"><i class="fa fa-laptop"></i> Dashboard</a></li>
-          <li ><a ui-sref="dashboard.notifications"><i class="fa fa-calendar-o"></i> Notification</a></li>
-          <li><a ui-sref="dashboard.basecamp"><i class="fa fa-users"></i> Basecamp</a></li>
-          <li><a ui-sref="dashboard.posts"><i class="fa fa-envelope-o"></i> Top posts</a></li>
-          <li class="divider"></li>
-          <li><a ui-sref="dashboard.moderation"><i class="fa fa-history"></i> Moderation</a></li>
-        </ul>
+      <li ><a ui-sref="dashboard.index"><i class="fa fa-laptop"></i> Dashboard</a></li>
+      <li ><a ui-sref="dashboard.notifications"><i class="fa fa-calendar-o"></i> Tickets</a></li>
+      <li><a ui-sref="dashboard.basecamp"><i class="fa fa-users"></i> Engagements</a></li>
+      <li><a ui-sref="dashboard.posts"><i class="fa fa-envelope-o"></i> Team</a></li>
+      <li class="divider"></li>
+      <li><a ui-sref="dashboard.moderation"><i class="fa fa-history"></i> Suggestions</a></li>
+    </ul>
+
 		<ul class="side-nav" ng:show="user.is_admin">
           <li ><a ui-sref="dashboard.index"><i class="fa fa-laptop"></i> Dashboard</a></li>
           <li ><a ui-sref="dashboard.notifications"><i class="fa fa-calendar-o"></i> Notification</a></li>

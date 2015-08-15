@@ -73,6 +73,32 @@ module.exports = function (module) {
         }
       });
 
+      $stateProvider.state('default.signup', {
+        url: '/signup',
+        templateUrl: 'modules/homepage/views/signup.html',
+        data: {
+          permissions: {
+            only: ['anonymous'],
+            redirectTo: 'dashboard.index'
+          }
+        },
+        resolve: {
+          load: ['$q', '$rootScope', function ($q, $rootScope) {
+            var deferred = $q.defer();
+
+            require.ensure([], function () {
+                
+              /** Controllers */
+              require('moduleDir/homepage/controllers/signup')(module);
+            
+              deferred.resolve();
+            }, 'signup');
+
+            return deferred.promise;
+          }]
+        }
+      });
+
       
       
       

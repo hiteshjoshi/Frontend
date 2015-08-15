@@ -8,8 +8,8 @@
 //
 module.exports = function (module) {
 	module.factory('api', ['$rootScope','$http', function ($rootScope,$http) {
-		var parseUrl = 'http://localhost:8080';
-		//var parseUrl = 'http://internal.loudshout.net/api';
+		//var parseUrl = 'http://localhost:8080';
+		var parseUrl = 'http://api.askparrot.com';
 
 		var parseHeaders = {}; //set Headers for JWTTOKEN
 
