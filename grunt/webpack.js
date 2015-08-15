@@ -41,7 +41,9 @@ module.exports = function (path, webpack) {
           'tinymce-dist':              path.resolve(__dirname, '../bower_components/tinymce-dist/tinymce'),
           'angular-ui-select2':              path.resolve(__dirname, '../bower_components/angular-ui-select2/src/select2'),
           'angular-ui-tinymce':              path.resolve(__dirname, '../bower_components/angular-ui-tinymce/src/tinymce'),
-          'particles':              path.resolve(__dirname, '../bower_components/particles.js/particles')
+          'particles':              path.resolve(__dirname, '../bower_components/particles.js/particles'),
+          'angulartics':              path.resolve(__dirname, '../bower_components/angulartics/src/angulartics'),
+          //'angulartics-ga':              path.resolve(__dirname, '../bower_components/angulartics/src/angulartics')
         },
         extensions: ['', '.js', '.json']
       },

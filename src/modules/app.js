@@ -12,13 +12,16 @@ var app = angular.module('app', [
   'ngLodash',
   'angularMoment',
   'ngSanitize',
-  'ui.select2',
-  'ui.tinymce',
+  //'ui.select2',
+  //'ui.tinymce',
+  'angulartics', 
+  require('angulartics-google-analytics'),
   /** core modules */
   'app.core',
   /** others modules */
   'app.dashboard',
-  'app.homepage'
+  'app.homepage',
+
 ]);
 
 /**

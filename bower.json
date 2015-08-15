@@ -30,6 +30,7 @@
     "summernote": "~0.6.9",
     "angular-ui-select2": "~0.0.5",
     "angular-ui-tinymce": "~0.0.9",
-    "particles.js": "~2.0.0"
+    "particles.js": "~2.0.0",
+    "angulartics": "~0.20.0"
   }
 }

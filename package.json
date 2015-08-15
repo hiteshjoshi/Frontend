@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "angular-webpack-plugin": "0.0.2",
+    "angulartics-google-analytics": "^0.1.1",
     "bundle-loader": "^0.5.2",
     "css-loader": "^0.9.0",
     "exports-loader": "^0.6.2",

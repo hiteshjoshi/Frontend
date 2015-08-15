@@ -16,21 +16,24 @@ webpackJsonp([0],[
 	  'ngLodash',
 	  'angularMoment',
 	  'ngSanitize',
-	  'ui.select2',
-	  'ui.tinymce',
+	  //'ui.select2',
+	  //'ui.tinymce',
+	  'angulartics', 
+	  __webpack_require__(1),
 	  /** core modules */
 	  'app.core',
 	  /** others modules */
 	  'app.dashboard',
-	  'app.homepage'
+	  'app.homepage',
+
 	]);
 
 	/**
 	 * load up our modules
 	 */
-	__webpack_require__(1);
-	__webpack_require__(12);
-	__webpack_require__(24);
+	__webpack_require__(3);
+	__webpack_require__(14);
+	__webpack_require__(26);
 
 	/**
 	 * bootstrap our App
@@ -42,6 +45,125 @@ webpackJsonp([0],[
 
 /***/ },
 /* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(2)
+	module.exports = 'angulartics.google.analytics'
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	(function(window, angular, undefined) {'use strict';
+
+	/**
+	 * @ngdoc overview
+	 * @name angulartics.google.analytics
+	 * Enables analytics support for Google Analytics (http://google.com/analytics)
+	 */
+	angular.module('angulartics.google.analytics', ['angulartics'])
+	.config(['$analyticsProvider', function ($analyticsProvider) {
+
+	  // GA already supports buffered invocations so we don't need
+	  // to wrap these inside angulartics.waitForVendorApi
+
+	  $analyticsProvider.settings.pageTracking.trackRelativePath = true;
+
+	  // Set the default settings for this module
+	  $analyticsProvider.settings.ga = {
+	    // array of additional account names (only works for analyticsjs)
+	    additionalAccountNames: undefined,
+	    userId: null
+	  };
+
+	  $analyticsProvider.registerPageTrack(function (path) {
+	    if (window._gaq) {
+	      _gaq.push(['_trackPageview', path]);
+	      angular.forEach($analyticsProvider.settings.ga.additionalAccountNames, function (accountName){
+	        _gaq.push([accountName + '._trackPageview', path]);
+	      });
+	    }
+	    if (window.ga) {
+	      if ($analyticsProvider.settings.ga.userId) {
+	        ga('set', '&uid', $analyticsProvider.settings.ga.userId);
+	      }
+	      ga('send', 'pageview', path);
+	      angular.forEach($analyticsProvider.settings.ga.additionalAccountNames, function (accountName){
+	        ga(accountName +'.send', 'pageview', path);
+	      });
+	    }
+	  });
+
+	  /**
+	   * Track Event in GA
+	   * @name eventTrack
+	   *
+	   * @param {string} action Required 'action' (string) associated with the event
+	   * @param {object} properties Comprised of the mandatory field 'category' (string) and optional  fields 'label' (string), 'value' (integer) and 'noninteraction' (boolean)
+	   *
+	   * @link https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide#SettingUpEventTracking
+	   *
+	   * @link https://developers.google.com/analytics/devguides/collection/analyticsjs/events
+	   */
+	  $analyticsProvider.registerEventTrack(function (action, properties) {
+
+	    // Google Analytics requires an Event Category
+	    if (!properties || !properties.category) {
+	      properties = properties || {};
+	      properties.category = 'Event';
+	    }
+	    // GA requires that eventValue be an integer, see:
+	    // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#eventValue
+	    // https://github.com/luisfarzati/angulartics/issues/81
+	    if (properties.value) {
+	      var parsed = parseInt(properties.value, 10);
+	      properties.value = isNaN(parsed) ? 0 : parsed;
+	    }
+
+	    if (window.ga) {
+
+	      var eventOptions = {
+	        eventCategory: properties.category,
+	        eventAction: action,
+	        eventLabel: properties.label,
+	        eventValue: properties.value,
+	        nonInteraction: properties.noninteraction,
+	        page: properties.page || window.location.hash.substring(1) || window.location.pathname,
+	        userId: $analyticsProvider.settings.ga.userId
+	      };
+
+	      // add custom dimensions and metrics
+	      for(var idx = 1; idx<=20;idx++) {
+	      if (properties['dimension' +idx.toString()]) {
+	        eventOptions['dimension' +idx.toString()] = properties['dimension' +idx.toString()];
+	      }
+	      if (properties['metric' +idx.toString()]) {
+	        eventOptions['metric' +idx.toString()] = properties['metric' +idx.toString()];
+	        }
+	      }
+	      ga('send', 'event', eventOptions);
+	      angular.forEach($analyticsProvider.settings.ga.additionalAccountNames, function (accountName){
+	        ga(accountName +'.send', 'event', eventOptions);
+	      });
+	    }
+
+	    else if (window._gaq) {
+	      _gaq.push(['_trackEvent', properties.category, action, properties.label, properties.value, properties.noninteraction]);
+	    }
+
+	  });
+
+	  $analyticsProvider.registerSetUsername(function (userId) {
+	    $analyticsProvider.settings.ga.userId = userId;
+	  });
+
+	}]);
+	})(window, window.angular);
+
+
+/***/ },
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59,28 +181,28 @@ webpackJsonp([0],[
 	]);
 
 	/** routes and run configs */
-	__webpack_require__(3)(appCore);
-	__webpack_require__(4)(appCore);
+	__webpack_require__(5)(appCore);
+	__webpack_require__(6)(appCore);
 
 	/** controllers */
-	__webpack_require__(5)(appCore);
+	__webpack_require__(7)(appCore);
 
 	/** directives */
-	__webpack_require__(6)(appCore);
-	__webpack_require__(7)(appCore);
-	__webpack_require__(2)(appCore);
+	__webpack_require__(8)(appCore);
+	__webpack_require__(9)(appCore);
+	__webpack_require__(4)(appCore);
 
 	/** filters */
-	__webpack_require__(8)(appCore);
+	__webpack_require__(10)(appCore);
 
 	/** factories */
-	__webpack_require__(9)(appCore);
-	__webpack_require__(10)(appCore);
 	__webpack_require__(11)(appCore);
+	__webpack_require__(12)(appCore);
+	__webpack_require__(13)(appCore);
 
 
 /***/ },
-/* 2 */
+/* 4 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -137,7 +259,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports) {
 
 	/**
@@ -182,7 +304,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -200,9 +322,10 @@ webpackJsonp([0],[
 	    '$compileProvider',
 	    '$filterProvider',
 	    '$provide',
+	    '$analyticsProvider',
 	    'sessionProvider',
 
-	    function ($locationProvider, $urlRouterProvider, $stateProvider, $controllerProvider, $compileProvider, $filterProvider, $provide,session) {
+	    function ($locationProvider, $urlRouterProvider, $stateProvider, $controllerProvider, $compileProvider, $filterProvider, $provide,$analyticsProvider,session) {
 	      /** store a reference to various provider functions */
 	      module.controller = $controllerProvider.register;
 	      module.directive  = $compileProvider.directive;
@@ -212,6 +335,9 @@ webpackJsonp([0],[
 	      module.service    = $provide.service;
 	      module.constant   = $provide.constant;
 	      module.value      = $provide.value;
+	      
+	      // turn off automatic tracking
+	      $analyticsProvider.virtualPageviews(false);
 
 	      /** default route */
 	      console.log(session.$get().exists(),session.$get().is_admin,session.$get().url);
@@ -237,7 +363,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -356,7 +482,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -393,7 +519,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 7 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -595,7 +721,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 8 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -616,7 +742,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 9 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -640,7 +766,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 10 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -748,7 +874,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -824,7 +950,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -836,10 +962,10 @@ webpackJsonp([0],[
 	var appDashboard = angular.module('app.dashboard', []);
 
 	/** routes configs */
-	__webpack_require__(13)(appDashboard);
+	__webpack_require__(15)(appDashboard);
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -884,8 +1010,8 @@ webpackJsonp([0],[
 
 	            __webpack_require__.e/* nsure */(1, function () {
 	              /** Controllers */
-	              __webpack_require__(14)(module);
-	              __webpack_require__(15)(module);
+	              __webpack_require__(16)(module);
+	              __webpack_require__(17)(module);
 
 	              deferred.resolve();
 	            });
@@ -912,8 +1038,8 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(2, function () {
 
 	              /** Controllers */
-	              __webpack_require__(14)(module);
 	              __webpack_require__(16)(module);
+	              __webpack_require__(18)(module);
 	              deferred.resolve();
 	            });
 
@@ -939,8 +1065,8 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(3, function () {
 
 	              /** Controllers */
-	              __webpack_require__(14)(module);
-	              __webpack_require__(17)(module);
+	              __webpack_require__(16)(module);
+	              __webpack_require__(19)(module);
 
 	              deferred.resolve();
 	            });
@@ -966,8 +1092,8 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(4, function () {
 
 	              /** Controllers */
-	              __webpack_require__(14)(module);
-	              __webpack_require__(18)(module);
+	              __webpack_require__(16)(module);
+	              __webpack_require__(20)(module);
 
 	              deferred.resolve();
 	            });
@@ -994,8 +1120,8 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(5, function () {
 
 	              /** Controllers */
-	              __webpack_require__(14)(module);
-	              __webpack_require__(19)(module);
+	              __webpack_require__(16)(module);
+	              __webpack_require__(21)(module);
 
 	              deferred.resolve();
 	            });
@@ -1022,8 +1148,8 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(6, function () {
 
 	              /** Controllers */
-	              __webpack_require__(14)(module);
-	              __webpack_require__(20)(module);
+	              __webpack_require__(16)(module);
+	              __webpack_require__(22)(module);
 
 	              deferred.resolve();
 	            });
@@ -1049,8 +1175,8 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(7, function () {
 
 	              /** Controllers */
-	              __webpack_require__(14)(module);
-	              __webpack_require__(21)(module);
+	              __webpack_require__(16)(module);
+	              __webpack_require__(23)(module);
 
 	              deferred.resolve();
 	            });
@@ -1077,7 +1203,7 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(8, function () {
 
 	              /** Controllers */
-	              __webpack_require__(22)(module);
+	              __webpack_require__(24)(module);
 
 	              deferred.resolve();
 	            });
@@ -1105,7 +1231,7 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(8/* duplicate */, function () {
 
 	              /** Controllers */
-	              __webpack_require__(22)(module);
+	              __webpack_require__(24)(module);
 
 	              deferred.resolve();
 	            });
@@ -1133,7 +1259,7 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(8/* duplicate */, function () {
 
 	              /** Controllers */
-	              __webpack_require__(22)(module);
+	              __webpack_require__(24)(module);
 
 	              deferred.resolve();
 	            });
@@ -1159,7 +1285,7 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(8/* duplicate */, function () {
 
 	              /** Controllers */
-	              __webpack_require__(22)(module);
+	              __webpack_require__(24)(module);
 
 	              deferred.resolve();
 	            });
@@ -1189,7 +1315,7 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(8/* duplicate */, function () {
 
 	              /** Controllers */
-	              __webpack_require__(22)(module);
+	              __webpack_require__(24)(module);
 
 	              deferred.resolve();
 	            });
@@ -1216,7 +1342,7 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(9, function () {
 
 	              /** Controllers */
-	              __webpack_require__(23)(module);
+	              __webpack_require__(25)(module);
 
 	              deferred.resolve();
 	            });
@@ -1242,7 +1368,7 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(9/* duplicate */, function () {
 
 	              /** Controllers */
-	              __webpack_require__(23)(module);
+	              __webpack_require__(25)(module);
 
 	              deferred.resolve();
 	            });
@@ -1265,8 +1391,6 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 14 */,
-/* 15 */,
 /* 16 */,
 /* 17 */,
 /* 18 */,
@@ -1275,7 +1399,9 @@ webpackJsonp([0],[
 /* 21 */,
 /* 22 */,
 /* 23 */,
-/* 24 */
+/* 24 */,
+/* 25 */,
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1287,10 +1413,10 @@ webpackJsonp([0],[
 	var appDashboard = angular.module('app.homepage', []);
 
 	/** routes configs */
-	__webpack_require__(25)(appDashboard);
+	__webpack_require__(27)(appDashboard);
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1330,9 +1456,9 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(10, function () {
 	              
 	              
-	              __webpack_require__(26)(module);
-	              __webpack_require__(27)(module);
 	              __webpack_require__(28)(module);
+	              __webpack_require__(29)(module);
+	              __webpack_require__(30)(module);
 
 	              deferred.resolve();
 	            });
@@ -1358,7 +1484,7 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(11, function () {
 
 	              /** Controllers */
-	              __webpack_require__(27)(module);
+	              __webpack_require__(29)(module);
 	              
 	              deferred.resolve();
 	            });
@@ -1384,7 +1510,7 @@ webpackJsonp([0],[
 	            __webpack_require__.e/* nsure */(12, function () {
 	                
 	              /** Controllers */
-	              __webpack_require__(28)(module);
+	              __webpack_require__(30)(module);
 	            
 	              deferred.resolve();
 	            });

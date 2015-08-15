@@ -13,9 +13,10 @@ module.exports = function (module) {
     '$compileProvider',
     '$filterProvider',
     '$provide',
+    '$analyticsProvider',
     'sessionProvider',
 
-    function ($locationProvider, $urlRouterProvider, $stateProvider, $controllerProvider, $compileProvider, $filterProvider, $provide,session) {
+    function ($locationProvider, $urlRouterProvider, $stateProvider, $controllerProvider, $compileProvider, $filterProvider, $provide,$analyticsProvider,session) {
       /** store a reference to various provider functions */
       module.controller = $controllerProvider.register;
       module.directive  = $compileProvider.directive;
@@ -25,6 +26,9 @@ module.exports = function (module) {
       module.service    = $provide.service;
       module.constant   = $provide.constant;
       module.value      = $provide.value;
+      
+      // turn off automatic tracking
+      $analyticsProvider.virtualPageviews(false);
 
       /** default route */
       console.log(session.$get().exists(),session.$get().is_admin,session.$get().url);
