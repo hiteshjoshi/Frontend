@@ -1,0 +1,13 @@
+      <div id="dashboard" ng:controller="dashboardCtrl">
+        <div class="row">
+          <alert ng:show="alerts.length" ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+
+          
+              
+
+          <div class="large-12">
+            
+          </div>
+        </div>
+
+      </div>
