@@ -23,7 +23,9 @@
           <div ng:show="sentimentVal">
           	<p>{{sentimentScore.string}} with a score of {{sentimentScore.score}}</p>
           	<p ng:repeat="val in sentimentVal">
-          		{{val.type}} => ({{val.governor}},{{val.dependent}})
+          		<span ng:hide="!val.dependent">
+          			{{val.type}} => ({{val.governor}},{{val.dependent}})
+          		</span>
           	</p>
           </div>
 
