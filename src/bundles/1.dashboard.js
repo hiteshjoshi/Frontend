@@ -44,7 +44,7 @@ webpackJsonp([1],{
 
 
 	    $scope.loadSentiments = function(){
-	      $http.get('http://api.artt.in/?q='+$scope.textSentiment)
+	      $http.get('http://api.artt.in/?q='+$scope.sentimentText)
 	      .success(function(response){
 	        $scope.sentimentScore = {
 	          score : response.$.sentimentValue,
