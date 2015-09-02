@@ -19,7 +19,7 @@ module.exports = function (module) {
         $scope.sentimentScore = {
           score : response.$.sentimentValue,
           string:response.$.sentiment
-        }
+        };
         $scope.sentimentVal = [];
         $scope.errorMsg=null;
 
@@ -28,15 +28,15 @@ module.exports = function (module) {
             type:item.$.type,
             dependent:item.dependent._,
             governor:item.governor._
-          })
-        })
+          });
+        });
       })
       .error(function(response){
         $scope.errorMsg = response;
         $scope.sentimentVal = null;
-      })
+      });
 
-    }
+    };
 
 
   	api.get('ping',false,false,false,function (err,response){

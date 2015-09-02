@@ -49,7 +49,7 @@ webpackJsonp([1],{
 	        $scope.sentimentScore = {
 	          score : response.$.sentimentValue,
 	          string:response.$.sentiment
-	        }
+	        };
 	        $scope.sentimentVal = [];
 	        $scope.errorMsg=null;
 
@@ -58,15 +58,15 @@ webpackJsonp([1],{
 	            type:item.$.type,
 	            dependent:item.dependent._,
 	            governor:item.governor._
-	          })
-	        })
+	          });
+	        });
 	      })
 	      .error(function(response){
 	        $scope.errorMsg = response;
 	        $scope.sentimentVal = null;
-	      })
+	      });
 
-	    }
+	    };
 
 
 	  	api.get('ping',false,false,false,function (err,response){
