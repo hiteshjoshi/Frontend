@@ -724,9 +724,6 @@ webpackJsonp([0],[
 	            restrict: 'A',
 	            replace: true,
 	            template: '<div class="chart" id="OrganiseChart6"></div>',
-	            scope: {
-	                json : null
-	            },
 	            link: function(scope, element, attrs, fn) {
 
 	              var margin = {top: 0, right: 320, bottom: 0, left: 0},
