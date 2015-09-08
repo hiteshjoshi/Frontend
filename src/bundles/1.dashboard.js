@@ -52,7 +52,7 @@ webpackJsonp([1],{
 	      .success(function(response){
 
 	        $scope.thedetails = {
-	                  "name": "Clifford Shanks",
+	                  "name": "Clifford Shanks"+(new Date()).getTime(),
 	                  "born": 1862,
 	                  "died": 1906,
 	                  "location": "Petersburg, VA",
@@ -100,7 +100,7 @@ webpackJsonp([1],{
 	                  ]
 	                }
 
-	                
+
 	        $scope.sentimentScore = {
 	          score : response.$.sentimentValue,
 	          string:response.$.sentiment
