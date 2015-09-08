@@ -781,7 +781,7 @@ webpackJsonp([0],[
 	                
 
 
-	                scope.$watch('json', function(newValue, oldValue) {
+	                scope.$watch(attrs.json, function(newValue, oldValue) {
 	                    if (newValue !== oldValue) {
 	                      // You actions here
 	                      start_rendering(newValue);

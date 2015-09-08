@@ -12,7 +12,7 @@ module.exports = function (module) {
   	$scope.plan = null;
 
 
-    $scope.json = {
+    $scope.thedetails = {
                   "name": "Clifford Shanks",
                   "born": 1862,
                   "died": 1906,
