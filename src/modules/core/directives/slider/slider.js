@@ -194,7 +194,7 @@ module.exports = function (module) {
       };
     })
 
-  .directive('tree', function($window) {
+  .directive('tree', function($window,$parse) {
       return {
 
             restrict: 'A',
@@ -203,7 +203,7 @@ module.exports = function (module) {
             link: function(scope, element, attrs, fn) {
 
               
-
+              var json = $parse(attrs.json);
 
               
                 var start_rendering = function(theValue){
@@ -260,14 +260,14 @@ module.exports = function (module) {
                 
 
 
-                scope.$watch(attrs.json, function(newValue, oldValue) {
+                scope.$watchCollection(json, function(newValue, oldValue) {
                   console.log(oldValue,newValue);
-                    if (newValue !== oldValue) {
+                    //if (newValue !== oldValue) {
                       // You actions here
                       start_rendering(newValue);
-                      console.log("I got the new value! ", newValue);
-                    }
-                }, true);
+                      //console.log("I got the new value! ", newValue);
+                    //}
+                });
 
               function elbow(d, i) {
                 return "M" + d.source.y + "," + d.source.x

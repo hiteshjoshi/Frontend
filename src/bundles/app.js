@@ -718,7 +718,7 @@ webpackJsonp([0],[
 	      };
 	    })
 
-	  .directive('tree', function($window) {
+	  .directive('tree', function($window,$parse) {
 	      return {
 
 	            restrict: 'A',
@@ -727,7 +727,7 @@ webpackJsonp([0],[
 	            link: function(scope, element, attrs, fn) {
 
 	              
-
+	              var json = $parse(attrs.json);
 
 	              
 	                var start_rendering = function(theValue){
@@ -784,14 +784,14 @@ webpackJsonp([0],[
 	                
 
 
-	                scope.$watch(attrs.json, function(newValue, oldValue) {
+	                scope.$watchCollection(json, function(newValue, oldValue) {
 	                  console.log(oldValue,newValue);
-	                    if (newValue !== oldValue) {
+	                    //if (newValue !== oldValue) {
 	                      // You actions here
 	                      start_rendering(newValue);
-	                      console.log("I got the new value! ", newValue);
-	                    }
-	                }, true);
+	                      //console.log("I got the new value! ", newValue);
+	                    //}
+	                });
 
 	              function elbow(d, i) {
 	                return "M" + d.source.y + "," + d.source.x
