@@ -41,7 +41,8 @@ webpackJsonp([1],{
 	  	$scope.reminders = [];
 	  	$scope.plan = null;
 
-
+	    $scope.thedetails = null;
+	    
 	    $scope.thedetails = {
 	                  "name": "Clifford Shanks",
 	                  "born": 1862,
