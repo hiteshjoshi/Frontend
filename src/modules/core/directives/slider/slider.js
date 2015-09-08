@@ -217,7 +217,8 @@ module.exports = function (module) {
                       .children(function(d) { return d.parents; })
                       .size([height, width]);
 
-                  var svg = d3.select("#OrganiseChart6").html("svg")
+                  $(element).html('');
+                  var svg = d3.select("#OrganiseChart6").append("svg")
                       .attr("width", width + margin.left + margin.right)
                       .attr("height", height + margin.top + margin.bottom)
                     .append("g")
