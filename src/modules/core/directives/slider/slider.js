@@ -201,273 +201,112 @@ module.exports = function (module) {
             template: '<div class="chart" id="OrganiseChart6"></div>',
         link: function(scope, element, attrs, fn) {
 
-          /* ---- particles.js config ---- */
 
-          var tree_structure = {
-              chart: {
-                  container: "#OrganiseChart6",
-                  levelSeparation:    25,
-                  siblingSeparation:  70,
-                  subTeeSeparation:   70,
-                  nodeAlign: "BOTTOM",
-                  scrollbar: "fancy",
-                  padding: 35,
-                  node: { HTMLclass: "evolution-tree" },
-                  connectors: {
-                      type: "curve",
-                      style: {
-                          "stroke-width": 2,
-                          "stroke-linecap": "round",
-                          "stroke": "#ccc"
-                      }
+          var margin = {top: 0, right: 320, bottom: 0, left: 0},
+              width = 960 - margin.left - margin.right,
+              height = 500 - margin.top - margin.bottom;
+
+          var tree = d3.layout.tree()
+              .separation(function(a, b) { return a.parent === b.parent ? 1 : .5; })
+              .children(function(d) { return d.parents; })
+              .size([height, width]);
+
+          var svg = d3.select(element).append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+          var json = {
+            "name": "Clifford Shanks",
+            "born": 1862,
+            "died": 1906,
+            "location": "Petersburg, VA",
+            "parents": [
+              {
+                "name": "James Shanks",
+                "born": 1831,
+                "died": 1884,
+                "location": "Petersburg, VA",
+                "parents": [
+                  {
+                    "name": "Robert Shanks",
+                    "born": 1781,
+                    "died": 1871,
+                    "location": "Ireland/Petersburg, VA"
+                  },
+                  {
+                    "name": "Elizabeth Shanks",
+                    "born": 1795,
+                    "died": 1871,
+                    "location": "Ireland/Petersburg, VA"
                   }
+                ]
               },
-
-              nodeStructure: {
-                  text: { name: "LIFE" },
-                  HTMLclass: "the-parent",
-                  children: [
-                      {
-                          text: { name: "true bacteria" },
-                          image: "img/truebacteria.png"
-                      },
-                      {
-                          pseudo: true,
-                          children: [
-                              {
-                                  text: { name: "archea bacteria" },
-                                  image: "img/archaebacteria.png"
-                              },
-                              {
-                                  text: { name: "EUKARYOTES" },
-                                  HTMLclass: "the-parent",
-                                  children: [
-                                      {
-                                          text: { name: "protocists" },
-                                          image: "img/protoctis.png"
-                                      },
-                                      {
-                                          pseudo: true,
-                                          children: [
-                                              {
-                                                  text: { name: "PLANTS" },
-                                                  HTMLclass: "the-parent",
-                                                  children: [
-                                                      {
-                                                          pseudo: true,
-                                                          children: [
-                                                              {
-                                                                  pseudo: true,
-                                                                  children: [
-                                                                      {
-                                                                          pseudo: true,
-                                                                          children: [
-                                                                              {
-                                                                                  text: { name: "flowering seed plants" },
-                                                                                  image: "img/cvijece2.png"
-                                                                              },
-                                                                              {
-                                                                                  text: { name: "non-flowering seed plants" },
-                                                                                  image: "img/ne_cvijece.png"
-                                                                              }
-                                                                          ]
-                                                                      },
-                                                                      {
-                                                                         text: { name: "ferns and fern allies" },
-                                                                          image: "img/ferns.png"
-                                                                      }
-                                                                  ]
-                                                              },
-                                                              {
-                                                                  text: { name: "mosses and allies" },
-                                                                  image: "img/mosses.png"
-                                                              }
-                                                          ]
-                                                      },
-                                                      {
-                                                          text: { name: "green algae" },
-                                                          image: "img/greenalgae.png"
-                                                      }
-                                                  ]
-                                              },
-                                              {
-                                                  pseudo: true,
-                                                  children: [
-                                                      {
-                                                          text: { name: "fungi and lichens" },
-                                                          image: "img/fungi.png"
-                                                      },
-                                                      {
-                                                          text: { name: "ANIMALS" },
-                                                          HTMLclass: "the-parent",
-                                                          children: [
-                                                              {
-                                                                  text: { name: "sponges" },
-                                                                  image: "img/spuzva.png"
-                                                              },
-                                                              {
-                                                                  pseudo: true,
-                                                                  children: [
-                                                                      {
-                                                                          text: { name: "cnidarians" },
-                                                                          image: "img/cnidarians.png"
-                                                                      },
-                                                                      {
-                                                                          pseudo: true,
-                                                                          childrenDropLevel: 1,
-                                                                          children: [
-                                                                              {
-                                                                                  pseudo: true,
-                                                                                  children: [
-                                                                                      {
-                                                                                          text: { name: "echinoderms" },
-                                                                                          image: "img/zvezda.png"
-                                                                                      },
-                                                                                      {
-                                                                                          text: { name: "VERTEBRATES" },
-                                                                                          HTMLclass: "the-parent",
-                                                                                          children: [
-                                                                                              {
-                                                                                                  text: { name: "cartilaginous fish" },
-                                                                                                  image: "img/cartilaginousfish.png"
-                                                                                              },
-                                                                                              {
-                                                                                                  text: { name: "bony fish" },
-                                                                                                  image: "img/bonyfish.png"
-                                                                                              },
-                                                                                              {
-                                                                                                  text: { name: "TETRAPODS" },
-                                                                                                  HTMLclass: "the-parent",
-                                                                                                  children: [
-                                                                                                      {
-                                                                                                          text: { name: "amphibians" },
-                                                                                                          image: "img/zaba.png"
-                                                                                                      },
-                                                                                                      {
-                                                                                                          text: { name: "AMNIOTES" },
-                                                                                                          HTMLclass: "the-parent",
-                                                                                                          children: [
-                                                                                                              {
-                                                                                                                  pseudo: true,
-                                                                                                                  children: [
-                                                                                                                      {
-                                                                                                                          text: { name: "turtles" },
-                                                                                                                          image: "img/kornjaca.png"
-                                                                                                                      },
-                                                                                                                      {
-                                                                                                                          pseudo: true,
-                                                                                                                          children: [
-                                                                                                                              {
-                                                                                                                                  text: { name: "snakes and lizards" },
-                                                                                                                                  image: "img/zmijurina.png"
-                                                                                                                              },
-                                                                                                                              {
-                                                                                                                                  text: { name: "crocodiles and birds" },
-                                                                                                                                  image: "img/ptica.png"
-                                                                                                                              }
-                                                                                                                          ]
-                                                                                                                      }
-                                                                                                                  ]
-                                                                                                              },
-                                                                                                              {
-                                                                                                                  text: { name: "mammals" },
-                                                                                                                  image: "img/slon.png"
-                                                                                                              }
-                                                                                                          ]
-                                                                                                      }
-                                                                                                  ]
-                                                                                              }
-                                                                                          ]
-                                                                                      }
-                                                                                  ]
-                                                                              },
-                                                                              {
-                                                                                  text: { name: "ARTHROPODS" },                                                                      
-                                                                                  HTMLclass: "the-parent",
-                                                                                  children: [
-                                                                                      {
-                                                                                          text: { name: "chelicerates" },
-                                                                                          image: "img/chelirates.png"
-                                                                                      },
-                                                                                      {
-                                                                                          pseudo: true,
-                                                                                          stackChildren: true,
-                                                                                          children: [
-                                                                                              {
-                                                                                                  text: { name: "crustaceans" },
-                                                                                                  image: "img/rak.png"
-                                                                                              },
-                                                                                              {
-                                                                                                  text: { name: "insects and myriapods" },
-                                                                                                  image: "img/insekti.png"
-                                                                                              }
-                                                                                          ]
-                                                                                      }
-                                                                                  ]
-                                                                              },
-                                                                              {
-                                                                                  pseudo: true,
-                                                                                  children: [
-                                                                                      {
-                                                                                          text: { name: "flatworms" },
-                                                                                          image: "img/flatare.png"
-                                                                                      },
-                                                                                      {
-                                                                                          text: { name: "lophophorates" },
-                                                                                          image: "img/lophoprates.png"
-                                                                                      }
-
-                                                                                  ]
-                                                                              },
-                                                                              {
-                                                                                  pseudo: true,
-                                                                                  childrenDropLevel: 1,
-                                                                                  stackChildren: true,
-                                                                                  children: [
-                                                                                      {
-                                                                                          text: { name: "rotifers" },
-                                                                                          image: "img/rotfiers.png"
-                                                                                      },
-                                                                                      {
-                                                                                          text: { name: "roundworms" },
-                                                                                          image: "img/roundworms.png"
-                                                                                      }
-                                                                                  ]
-                                                                              },
-                                                                              {
-                                                                                  pseudo: true,
-                                                                                  childrenDropLevel: 1,
-                                                                                  stackChildren: true,
-                                                                                  children: [
-                                                                                      {
-                                                                                          text: { name: "mollusks" },
-                                                                                          image: "img/mosculs.png"
-                                                                                      },
-                                                                                      {
-                                                                                          text: { name: "segmented worms" },
-                                                                                          image: "img/segmentedworms.png"
-                                                                                      }
-                                                                                  ]
-                                                                              }
-                                                                          ]
-                                                                      }
-                                                                  ]
-                                                              }
-                                                          ]
-                                                      }
-                                                  ]
-                                              }
-                                          ]
-                                      }
-                                  ]
-                              }
-                          ]
-                      }
-                  ]
+              {
+                "name": "Ann Emily Brown",
+                "born": 1826,
+                "died": 1866,
+                "location": "Brunswick/Petersburg, VA",
+                "parents": [
+                  {
+                    "name": "Henry Brown",
+                    "born": 1792,
+                    "died": 1845,
+                    "location": "Montgomery, NC"
+                  },
+                  {
+                    "name": "Sarah Houchins",
+                    "born": 1793,
+                    "died": 1882,
+                    "location": "Montgomery, NC"
+                  }
+                ]
               }
-          };
+            ]
+          }
+            
 
-          $window.Treant( tree_structure );
+            var nodes = tree.nodes(json);
+
+            var link = svg.selectAll(".link")
+                .data(tree.links(nodes))
+              .enter().append("path")
+                .attr("class", "link")
+                .attr("d", elbow);
+
+            var node = svg.selectAll(".node")
+                .data(nodes)
+              .enter().append("g")
+                .attr("class", "node")
+                .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+
+            node.append("text")
+                .attr("class", "name")
+                .attr("x", 8)
+                .attr("y", -6)
+                .text(function(d) { return d.name; });
+
+            node.append("text")
+                .attr("x", 8)
+                .attr("y", 8)
+                .attr("dy", ".71em")
+                .attr("class", "about lifespan")
+                .text(function(d) { return d.born + "–" + d.died; });
+
+            node.append("text")
+                .attr("x", 8)
+                .attr("y", 8)
+                .attr("dy", "1.86em")
+                .attr("class", "about location")
+                .text(function(d) { return d.location; });
+
+          function elbow(d, i) {
+            return "M" + d.source.y + "," + d.source.x
+                 + "H" + d.target.y + "V" + d.target.x
+                 + (d.target.children ? "" : "h" + margin.right);
+          }
 
         }
       };

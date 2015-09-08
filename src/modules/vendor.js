@@ -25,5 +25,4 @@ require('angularSanitize');
 //require('angular-ui-tinymce');
 require('particles');
 require('angulartics');
-require('raphael');
-require('componentDir/treantjs.js');
+require('d3');
