@@ -12,8 +12,16 @@ module.exports = function (module) {
   	$scope.plan = null;
 
     $scope.thedetails = null;
+
     
-    $scope.thedetails = {
+
+
+
+    $scope.loadSentiments = function(){
+      $http.get('http://api.artt.in/?q='+$scope.sentimentText)
+      .success(function(response){
+
+        $scope.thedetails = {
                   "name": "Clifford Shanks",
                   "born": 1862,
                   "died": 1906,
@@ -62,11 +70,7 @@ module.exports = function (module) {
                   ]
                 }
 
-
-
-    $scope.loadSentiments = function(){
-      $http.get('http://api.artt.in/?q='+$scope.sentimentText)
-      .success(function(response){
+                
         $scope.sentimentScore = {
           score : response.$.sentimentValue,
           string:response.$.sentiment
