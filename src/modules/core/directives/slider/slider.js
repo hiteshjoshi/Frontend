@@ -202,24 +202,27 @@ module.exports = function (module) {
             template: '<div class="chart" id="OrganiseChart6"></div>',
             link: function(scope, element, attrs, fn) {
 
-              var margin = {top: 0, right: 320, bottom: 0, left: 0},
-                  width = 960 - margin.left - margin.right,
-                  height = 500 - margin.top - margin.bottom;
-
-              var tree = d3.layout.tree()
-                  .separation(function(a, b) { return a.parent === b.parent ? 1 : .5; })
-                  .children(function(d) { return d.parents; })
-                  .size([height, width]);
-
-              var svg = d3.select("#OrganiseChart6").append("svg")
-                  .attr("width", width + margin.left + margin.right)
-                  .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+              
 
 
               
                 var start_rendering = function(theValue){
+
+                  var margin = {top: 0, right: 320, bottom: 0, left: 0},
+                    width = 960 - margin.left - margin.right,
+                    height = 500 - margin.top - margin.bottom;
+
+                  var tree = d3.layout.tree()
+                      .separation(function(a, b) { return a.parent === b.parent ? 1 : .5; })
+                      .children(function(d) { return d.parents; })
+                      .size([height, width]);
+
+                  var svg = d3.select("#OrganiseChart6").append("svg")
+                      .attr("width", width + margin.left + margin.right)
+                      .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
                   var nodes = tree.nodes(theValue);
 
                   var link = svg.selectAll(".link")

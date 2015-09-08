@@ -22,7 +22,7 @@ module.exports = function (module) {
       .success(function(response){
 
         $scope.thedetails = {
-                  "name": "Clifford Shanks",
+                  "name": "Clifford Shanks"+(new Date()).getTime(),
                   "born": 1862,
                   "died": 1906,
                   "location": "Petersburg, VA",
@@ -70,7 +70,7 @@ module.exports = function (module) {
                   ]
                 }
 
-                
+
         $scope.sentimentScore = {
           score : response.$.sentimentValue,
           string:response.$.sentiment
