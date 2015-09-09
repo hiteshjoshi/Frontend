@@ -214,6 +214,8 @@ module.exports = function (module) {
                 var colors = $window.d3.scale.category20c();
 
                 var dataset = JSON.parse(attrs.json);
+                if(!dataset)
+                  return;
 
                 //$window.d3.select(element[0]).select('svg').remove();
                 var svg = $window.d3.select(element[0]).append('svg:svg').attr("id","myID"+i).attr({'width':w,'height':h});

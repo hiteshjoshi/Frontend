@@ -41,7 +41,7 @@ webpackJsonp([1],{
 	  	$scope.reminders = [];
 	  	$scope.plan = null;
 
-	    $scope.graphs = [];
+	    $scope.graphs = {};
 
 	    $scope.loadSentiments = function(){
 	      $http.get('http://api.artt.in/?q='+$scope.sentimentText)
@@ -70,7 +70,7 @@ webpackJsonp([1],{
 	          //}
 	          
 	        });
-	        $scope.graphs.push(newData);
+	        $scope.graphs = (newData);
 	      })
 	      .error(function(response){
 	        $scope.errorMsg = response;
