@@ -43,7 +43,6 @@ webpackJsonp([1],{
 
 	    $scope.graphs = [];
 
-	    $scope.sentimentText = 'what all pricing plans do you offer';
 	    $scope.loadSentiments = function(){
 	      $http.get('http://api.artt.in/?q='+$scope.sentimentText)
 	      .success(function(response){
@@ -80,7 +79,6 @@ webpackJsonp([1],{
 
 	    };
 
-	    $scope.loadSentiments();
 
 
 	  	api.get('ping',false,false,false,function (err,response){

@@ -13,7 +13,6 @@ module.exports = function (module) {
 
     $scope.graphs = [];
 
-    $scope.sentimentText = 'what all pricing plans do you offer';
     $scope.loadSentiments = function(){
       $http.get('http://api.artt.in/?q='+$scope.sentimentText)
       .success(function(response){
@@ -50,7 +49,6 @@ module.exports = function (module) {
 
     };
 
-    $scope.loadSentiments();
 
 
   	api.get('ping',false,false,false,function (err,response){
