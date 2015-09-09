@@ -728,6 +728,8 @@ webpackJsonp([0],[
 
 	              
 	              var bootMe = function(){
+	                jQuery(element[0]).html('');
+	                
 	                var w = 1000;
 	                var h = 600;
 	                var linkDistance=200;
