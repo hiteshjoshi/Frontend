@@ -1,13 +1,15 @@
       <div id="dashboard" ng:controller="dashboardCtrl">
         <div class="row">
-          <alert ng:show="alerts.length" ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+          <!-- <alert ng:show="alerts.length" ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
 
-          
+           -->
               
 
           <div class="large-12">
 
-          <div tree json="{{thedetails}}"></div>
+          <div ng:repeat="graph in graphs">
+            <div tree json="{{graph}}"></div>
+          </div>
 
           <form ng:submit="loadSentiments()">
           	<div class="row">
@@ -25,8 +27,8 @@
           <div ng:show="sentimentVal">
           	<p>{{sentimentScore.string}} with a score of {{sentimentScore.score}}</p>
           	<p ng:repeat="val in sentimentVal">
-          		<span ng:hide="!val.dependent">
-          			{{val.type}} => ({{val.governor}},{{val.dependent}})
+          		<span ng:hide="!val.target">
+          			{{val.type}} => ({{val.source}},{{val.target}})
           		</span>
           	</p>
           </div>

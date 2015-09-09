@@ -11,65 +11,12 @@ module.exports = function (module) {
   	$scope.reminders = [];
   	$scope.plan = null;
 
-    $scope.thedetails = null;
+    $scope.graphs = [];
 
-    
-
-
-
+    $scope.sentimentText = 'what all pricing plans do you offer';
     $scope.loadSentiments = function(){
       $http.get('http://api.artt.in/?q='+$scope.sentimentText)
       .success(function(response){
-
-        $scope.thedetails = {
-                  "name": "Clifford Shanks"+(new Date()).getTime(),
-                  "born": 1862,
-                  "died": 1906,
-                  "location": "Petersburg, VA",
-                  "parents": [
-                    {
-                      "name": "James Shanks",
-                      "born": 1831,
-                      "died": 1884,
-                      "location": "Petersburg, VA",
-                      "parents": [
-                        {
-                          "name": "Robert Shanks",
-                          "born": 1781,
-                          "died": 1871,
-                          "location": "Ireland/Petersburg, VA"
-                        },
-                        {
-                          "name": "Elizabeth Shanks",
-                          "born": 1795,
-                          "died": 1871,
-                          "location": "Ireland/Petersburg, VA"
-                        }
-                      ]
-                    },
-                    {
-                      "name": "Ann Emily Brown",
-                      "born": 1826,
-                      "died": 1866,
-                      "location": "Brunswick/Petersburg, VA",
-                      "parents": [
-                        {
-                          "name": "Henry Brown",
-                          "born": 1792,
-                          "died": 1845,
-                          "location": "Montgomery, NC"
-                        },
-                        {
-                          "name": "Sarah Houchins",
-                          "born": 1793,
-                          "died": 1882,
-                          "location": "Montgomery, NC"
-                        }
-                      ]
-                    }
-                  ]
-                }
-
 
         $scope.sentimentScore = {
           score : response.$.sentimentValue,
@@ -77,14 +24,24 @@ module.exports = function (module) {
         };
         $scope.sentimentVal = [];
         $scope.errorMsg=null;
-
+        var newData = {
+          nodes:[{'name':'ROOT'}],
+          edges:[]
+        };
         response.dependencies[1].dep.forEach(function(item,index){
-          $scope.sentimentVal.push({
-            type:item.$.type,
-            dependent:item.dependent._,
-            governor:item.governor._
-          });
+          //if(item.$.type!=='root'){
+            
+            newData.nodes[parseInt(item.dependent.$.idx)]= {name:item.dependent._};
+            newData.edges.push({type:item.$.type,source:parseInt(item.governor.$.idx),target:parseInt(item.dependent.$.idx)});
+            $scope.sentimentVal.push({
+              type:item.$.type,
+              target:item.dependent._,
+              source:item.governor._
+            });
+          //}
+          
         });
+        $scope.graphs.push(newData);
       })
       .error(function(response){
         $scope.errorMsg = response;
@@ -92,6 +49,8 @@ module.exports = function (module) {
       });
 
     };
+
+    $scope.loadSentiments();
 
 
   	api.get('ping',false,false,false,function (err,response){
