@@ -728,8 +728,7 @@ webpackJsonp([0],[
 
 	              
 	              var bootMe = function(){
-	                jQuery(element[0]).html('');
-	                
+
 	                var w = 1000;
 	                var h = 600;
 	                var linkDistance=200;
@@ -738,7 +737,7 @@ webpackJsonp([0],[
 
 	                var dataset = JSON.parse(attrs.json);
 
-	             
+	                $window.d3.select(element[0]).select('svg').remove();
 	                var svg = $window.d3.select(element[0]).append('svg').attr({'width':w,'height':h});
 
 	                var force = $window.d3.layout.force()

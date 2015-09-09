@@ -201,11 +201,12 @@ module.exports = function (module) {
             replace: true,
             link: function(scope, element, attrs, fn) {
 
-
+              var i =0;
               
               var bootMe = function(){
-                jQuery(element[0]).html('');
-                
+
+                i++;
+
                 var w = 1000;
                 var h = 600;
                 var linkDistance=200;
@@ -214,8 +215,8 @@ module.exports = function (module) {
 
                 var dataset = JSON.parse(attrs.json);
 
-             
-                var svg = $window.d3.select(element[0]).append('svg').attr({'width':w,'height':h});
+                $window.d3.select(element[0]).select('svg').remove();
+                var svg = $window.d3.select(element[0]).attr("id","myID"+i).append('svg').attr({'width':w,'height':h});
 
                 var force = $window.d3.layout.force()
                     .nodes(dataset.nodes)
