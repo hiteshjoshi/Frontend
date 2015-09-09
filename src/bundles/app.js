@@ -725,9 +725,11 @@ webpackJsonp([0],[
 	            replace: true,
 	            link: function(scope, element, attrs, fn) {
 
-
+	              var i =0;
 	              
 	              var bootMe = function(){
+
+	                i++;
 
 	                var w = 1000;
 	                var h = 600;
@@ -737,8 +739,8 @@ webpackJsonp([0],[
 
 	                var dataset = JSON.parse(attrs.json);
 
-	                $window.d3.select(element[0]).select('svg').remove();
-	                var svg = $window.d3.select(element[0]).append('svg').attr({'width':w,'height':h});
+	                //$window.d3.select(element[0]).select('svg').remove();
+	                var svg = $window.d3.select(element[0]).append('svg:svg').attr("id","myID"+i).attr({'width':w,'height':h});
 
 	                var force = $window.d3.layout.force()
 	                    .nodes(dataset.nodes)
