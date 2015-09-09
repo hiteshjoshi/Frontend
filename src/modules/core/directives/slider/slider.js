@@ -7,20 +7,6 @@
  */
 module.exports = function (module) {
   module
-  // .directive('particle', ['$timeout', function ($timeout) {
-  //   return {
-  //     restrict: 'A',
-  //     link: function($scope, iElm, iAttrs) {
-  //       $timeout(function () {
-  //         // jQuery(document).foundation(function(){});
-          
-          
-  //         /* ---- particles.js config ---- */
-  //       });
-  //     }
-  //   };
-  // }])
-
   .directive('particles', function($window) {
       return {
         restrict: 'A',
@@ -214,6 +200,7 @@ module.exports = function (module) {
                 var colors = $window.d3.scale.category20c();
 
                 var dataset = JSON.parse(attrs.json);
+                
                 if(!dataset)
                   return;
 

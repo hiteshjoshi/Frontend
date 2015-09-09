@@ -531,20 +531,6 @@ webpackJsonp([0],[
 	 */
 	module.exports = function (module) {
 	  module
-	  // .directive('particle', ['$timeout', function ($timeout) {
-	  //   return {
-	  //     restrict: 'A',
-	  //     link: function($scope, iElm, iAttrs) {
-	  //       $timeout(function () {
-	  //         // jQuery(document).foundation(function(){});
-	          
-	          
-	  //         /* ---- particles.js config ---- */
-	  //       });
-	  //     }
-	  //   };
-	  // }])
-
 	  .directive('particles', function($window) {
 	      return {
 	        restrict: 'A',
@@ -738,6 +724,9 @@ webpackJsonp([0],[
 	                var colors = $window.d3.scale.category20c();
 
 	                var dataset = JSON.parse(attrs.json);
+	                
+	                if(!dataset)
+	                  return;
 
 	                //$window.d3.select(element[0]).select('svg').remove();
 	                var svg = $window.d3.select(element[0]).append('svg:svg').attr("id","myID"+i).attr({'width':w,'height':h});
