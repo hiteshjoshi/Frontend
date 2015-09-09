@@ -204,6 +204,8 @@ module.exports = function (module) {
 
               
               var bootMe = function(){
+                jQuery(element[0]).html('');
+                
                 var w = 1000;
                 var h = 600;
                 var linkDistance=200;
@@ -337,7 +339,7 @@ module.exports = function (module) {
 
               bootMe();
               
-              scope.$watch(scope.graphs[0],function(n,o){
+              scope.$watch(attrs.json,function(n,o){
                 bootMe();
               });
               

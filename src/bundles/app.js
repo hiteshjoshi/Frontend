@@ -861,7 +861,7 @@ webpackJsonp([0],[
 
 	              bootMe();
 	              
-	              scope.$watch(scope.graphs[0],function(n,o){
+	              scope.$watch(attrs.json,function(n,o){
 	                bootMe();
 	              });
 	              
