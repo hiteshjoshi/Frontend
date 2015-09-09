@@ -711,11 +711,8 @@ webpackJsonp([0],[
 	            replace: true,
 	            link: function(scope, element, attrs, fn) {
 
-	              var i =0;
 	              
 	              var bootMe = function(){
-
-	                i++;
 
 	                var w = 1000;
 	                var h = 600;
@@ -725,11 +722,12 @@ webpackJsonp([0],[
 
 	                var dataset = JSON.parse(attrs.json);
 	                
-	                if(!dataset)
+	                if(!dataset){
 	                  return;
+	                }
 
 	                //$window.d3.select(element[0]).select('svg').remove();
-	                var svg = $window.d3.select(element[0]).append('svg:svg').attr("id","myID"+i).attr({'width':w,'height':h});
+	                var svg = $window.d3.select(element[0]).append('svg:svg').attr('id','myID'+attrs.id).attr({'width':w,'height':h});
 
 	                var force = $window.d3.layout.force()
 	                    .nodes(dataset.nodes)
@@ -781,7 +779,7 @@ webpackJsonp([0],[
 	                           'stroke-opacity':0,
 	                           'fill':'blue',
 	                           'stroke':'red',
-	                           'id':function(d,i) {return 'edgepath'+i;}})
+	                           'id':function(d,i) {return 'edgepath'+i+attrs.id;}})
 	                    .style('pointer-events', 'none');
 
 	                var edgelabels = svg.selectAll('.edgelabel')
@@ -790,14 +788,14 @@ webpackJsonp([0],[
 	                    .append('text')
 	                    .style('pointer-events', 'none')
 	                    .attr({'class':'edgelabel',
-	                           'id':function(d,i){return 'edgelabel'+i;},
+	                           'id':function(d,i){return 'edgelabel'+i+attrs.id;},
 	                           'dx':80,
 	                           'dy':0,
 	                           'font-size':10,
 	                           'fill':'#aaa'});
 
 	                edgelabels.append('textPath')
-	                    .attr('xlink:href',function(d,i) {return '#edgepath'+i;})
+	                    .attr('xlink:href',function(d,i) {return '#edgepath'+i+attrs.id;})
 	                    .style('pointer-events', 'none')
 	                    .text(function(d,i){return d.type;});
 
@@ -853,9 +851,12 @@ webpackJsonp([0],[
 
 	              bootMe();
 	              
-	              scope.$watch(attrs.json,function(n,o){
-	                bootMe();
-	              });
+	              // scope.$watch(attrs.json,function(n,o){
+	              //   console.log('Values',n,o);
+	              //   if(n!==o){
+	              //     bootMe(); 
+	              //   }
+	              // });
 	              
 
 	        }

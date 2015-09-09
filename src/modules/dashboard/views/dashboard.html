@@ -7,9 +7,11 @@
 
           <div class="large-12">
 
-          
-          <div tree json="{{graphs}}"></div>
-          
+          <div ng:repeat="graph in graphs">
+            <h5>{{graph.sentence}}</h5>
+            <div tree json="{{graph}}" id="{{$index}}"></div>
+            <hr/>
+          </div>
 
           <form ng:submit="loadSentiments()">
           	<div class="row">

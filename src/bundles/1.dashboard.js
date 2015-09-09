@@ -41,8 +41,9 @@ webpackJsonp([1],{
 	  	$scope.reminders = [];
 	  	$scope.plan = null;
 
-	    $scope.graphs = {};
+	    $scope.graphs = [];
 
+	    $scope.sentimentText = 'what all pricing plans do you offer';
 	    $scope.loadSentiments = function(){
 	      $http.get('http://api.artt.in/?q='+$scope.sentimentText)
 	      .success(function(response){
@@ -54,12 +55,13 @@ webpackJsonp([1],{
 	        $scope.sentimentVal = [];
 	        $scope.errorMsg=null;
 	        var newData = {
+	          sentence:'',
 	          nodes:[{'name':'ROOT'}],
 	          edges:[]
 	        };
 	        response.dependencies[1].dep.forEach(function(item,index){
 	          //if(item.$.type!=='root'){
-	            
+	            newData.sentence = $scope.sentimentText;
 	            newData.nodes[parseInt(item.dependent.$.idx)]= {name:item.dependent._};
 	            newData.edges.push({type:item.$.type,source:parseInt(item.governor.$.idx),target:parseInt(item.dependent.$.idx)});
 	            $scope.sentimentVal.push({
@@ -70,7 +72,7 @@ webpackJsonp([1],{
 	          //}
 	          
 	        });
-	        $scope.graphs = (newData);
+	        $scope.graphs.push(newData);
 	      })
 	      .error(function(response){
 	        $scope.errorMsg = response;
@@ -79,6 +81,7 @@ webpackJsonp([1],{
 
 	    };
 
+	    $scope.loadSentiments();
 
 
 	  	api.get('ping',false,false,false,function (err,response){
